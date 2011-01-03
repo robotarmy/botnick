@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'socket'
+if ARGV.empty? 
+  puts "#{__FILE__} host port"
+  exit(1)
+end
+service = TCPServer.new(ARGV[0],ARGV[1]) 
+while session = service.accept
+  while rec = session.gets
+    puts rec
+  end
+  session.print STDIN.gets
+  session.close
+end

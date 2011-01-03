@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'socket'
+service = TCPServer.new('0.0.0.0',113) 
+while session = service.accept
+  rec = session.gets.chomp
+  session.puts "#{rec} : USERID : UNIX : stjohns"
+  session.close
+end
