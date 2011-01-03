@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require 'socket'
+if ARGV.empty? 
+  puts "#{__FILE__} host port"
+  exit(1)
+end
+host = Addrinfo.tcp(ARGV[0],ARGV[1])
+while true do
+  host.connect do |socket|
+    input = STDIN.gets 
+    socket.puts input
+    while rest = socket.gets
+      puts rest
+    end
+  end
+end
